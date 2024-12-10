@@ -13,8 +13,8 @@ import { Post as BlogPost } from './post.entity';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 
-@ApiTags('posts')
-@Controller('posts')
+@ApiTags('api/posts')
+@Controller('api/posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
