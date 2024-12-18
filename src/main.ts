@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: false });
 
   const config = new DocumentBuilder()
     .setTitle('Blog API')
@@ -24,7 +24,6 @@ async function bootstrap() {
     ],
   });
 
-  app.enableCors();
   await app.listen(3000);
   console.log('Application is running on http://localhost:3000/api');
 }
