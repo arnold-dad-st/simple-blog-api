@@ -9,8 +9,9 @@ import { SupabaseService } from '../supabase/supabase.service';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { UserResponse } from './dto/user-response';
-import { ApiBody, ApiOperation } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('api/auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly supabaseService: SupabaseService) {}
