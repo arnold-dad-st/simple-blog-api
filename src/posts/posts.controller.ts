@@ -21,35 +21,35 @@ export class PostsController {
   @ApiOperation({ summary: 'Create a new post' })
   @ApiBody({ type: CreatePostDto })
   @Post()
-  create(@Body() createPostDto: CreatePostDto): BlogPost {
-    return this.postsService.create(createPostDto);
+  async create(@Body() createPostDto: CreatePostDto): Promise<BlogPost> {
+    return await this.postsService.create(createPostDto);
   }
 
   @ApiOperation({ summary: 'Get all posts' })
   @Get()
-  findAll(): BlogPost[] {
-    return this.postsService.findAll();
+  async findAll(): Promise<BlogPost[]> {
+    return await this.postsService.findAll();
   }
 
   @ApiOperation({ summary: 'Get post by ID' })
   @Get(':id')
-  findOne(@Param('id') id: string): BlogPost {
-    return this.postsService.findOne(id);
+  async findOne(@Param('id') id: string): Promise<BlogPost> {
+    return await this.postsService.findOne(id);
   }
 
   @ApiOperation({ summary: 'Update a post by ID' })
   @ApiBody({ type: UpdatePostDto })
   @Put(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updatePostDto: UpdatePostDto,
-  ): BlogPost {
-    return this.postsService.update(id, updatePostDto);
+  ): Promise<BlogPost> {
+    return await this.postsService.update(id, updatePostDto);
   }
 
   @ApiOperation({ summary: 'Delete a post by ID' })
   @Delete(':id')
-  delete(@Param('id') id: string): void {
-    this.postsService.delete(id);
+  async delete(@Param('id') id: string): Promise<void> {
+    return await this.postsService.delete(id);
   }
 }
