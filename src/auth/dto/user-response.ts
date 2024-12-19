@@ -1,7 +1,13 @@
-import { IsEmail, IsString, MinLength } from 'class-validator';
+import { IsEmail, IsString, IsUUID } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class RegisterUserDto {
+export class UserResponse {
+  @ApiProperty({ description: 'Unique identifier of the user' })
+  @IsUUID()
+  id: string;
+
+  created_at: Date;
+
   @ApiProperty({ description: 'Last name of the user' })
   @IsString()
   lastName: string;
@@ -17,9 +23,4 @@ export class RegisterUserDto {
   @ApiProperty({ description: 'Username of the user' })
   @IsString()
   username: string;
-
-  @ApiProperty({ description: 'Password of the user' })
-  @IsString()
-  @MinLength(6, { message: 'Password must be at least 6 characters long.' })
-  password: string;
 }
