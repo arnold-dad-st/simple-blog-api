@@ -12,7 +12,7 @@ import { UserResponse } from './dto/user-response';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('api/auth')
-@Controller('auth')
+@Controller('api/auth')
 export class AuthController {
   constructor(private readonly supabaseService: SupabaseService) {}
 
