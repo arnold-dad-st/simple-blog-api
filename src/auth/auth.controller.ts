@@ -22,7 +22,8 @@ export class AuthController {
   async register(
     @Body() registerUserDto: RegisterUserDto,
   ): Promise<UserResponse> {
-    const { email, password, firstName, lastName, username } = registerUserDto;
+    const { email, password, firstName, lastName, username, avatar } =
+      registerUserDto;
 
     // Register the user with Supabase
     const {
@@ -41,6 +42,7 @@ export class AuthController {
           firstName,
           lastName,
           username,
+          avatar,
           email,
         })
         .select()
@@ -52,6 +54,7 @@ export class AuthController {
     return {
       id: profile.id,
       created_at: profile.created_at,
+      avatar: profile.avatar,
       firstName: profile.firstName,
       lastName: profile.lastName,
       username: profile.username,

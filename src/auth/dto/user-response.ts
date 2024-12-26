@@ -23,4 +23,8 @@ export class UserResponse {
   @ApiProperty({ description: 'Username of the user' })
   @IsString()
   username: string;
+
+  @ApiProperty({ description: "User's profile picture" })
+  @IsString()
+  avatar: string;
 }

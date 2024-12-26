@@ -22,4 +22,8 @@ export class RegisterUserDto {
   @IsString()
   @MinLength(6, { message: 'Password must be at least 6 characters long.' })
   password: string;
+
+  @ApiProperty({ description: "User's profile picture" })
+  @IsString()
+  avatar: string;
 }

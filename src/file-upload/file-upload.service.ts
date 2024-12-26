@@ -22,6 +22,7 @@ export class FileUploadService {
         });
 
       if (error) {
+        console.log(error);
         throw new InternalServerErrorException(
           `Error uploading file: ${error.message}`,
         );
@@ -32,6 +33,7 @@ export class FileUploadService {
       } = this.supabaseService.supabase.storage
         .from(bucketName)
         .getPublicUrl(filePath);
+
       return { url: publicUrl, data };
     } catch (err) {
       throw new InternalServerErrorException(err.message);
