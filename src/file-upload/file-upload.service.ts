@@ -11,7 +11,7 @@ export class FileUploadService {
 
   async uploadToSupabase(file: Express.Multer.File): Promise<any> {
     try {
-      const bucketName = this.configService.get<string>('post_SUPABASE_BUCKET');
+      const bucketName = this.configService.get<string>('SUPABASE_BUCKET_NAME');
       const filePath = `${Date.now()}-${file.originalname}`;
 
       const { data, error } = await this.supabaseService.supabase.storage
