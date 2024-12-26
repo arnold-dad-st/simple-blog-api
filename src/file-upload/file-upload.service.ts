@@ -11,18 +11,18 @@ export class FileUploadService {
 
   async uploadToSupabase(file: Express.Multer.File): Promise<any> {
     try {
-      const bucketName = this.configService.get<string>('SUPABASE_BUCKET_NAME');
+      const bucketName = 'images';
       const filePath = `${Date.now()}-${file.originalname}`;
 
       const { data, error } = await this.supabaseService.supabase.storage
-        .from('images')
+        .from(bucketName)
         .upload(filePath, file.buffer, {
           contentType: file.mimetype,
         });
 
       if (error) {
-        console.log(error);
-        console.log('Error uploading bucket-name:', bucketName);
+        console.error('Error uploading bucket-name:', bucketName);
+        console.error('Error uploading file:', error);
         throw new InternalServerErrorException(
           `Error uploading file: ${error.message}`,
         );
