@@ -15,7 +15,7 @@ export class FileUploadService {
       const filePath = `${Date.now()}-${file.originalname}`;
 
       const { data, error } = await this.supabaseService.supabase.storage
-        .from(bucketName)
+        .from('images')
         .upload(filePath, file.buffer, {
           contentType: file.mimetype,
         });
