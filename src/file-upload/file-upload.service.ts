@@ -22,6 +22,7 @@ export class FileUploadService {
 
       if (error) {
         console.log(error);
+        console.log('Error uploading bucket-name:', bucketName);
         throw new InternalServerErrorException(
           `Error uploading file: ${error.message}`,
         );
