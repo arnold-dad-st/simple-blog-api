@@ -8,7 +8,6 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileUploadService } from './file-upload.service';
-import { diskStorage } from 'multer';
 import {
   ApiTags,
   ApiOperation,
@@ -17,6 +16,7 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { AuthGuard } from '../middleware/guard/auth.guard';
+import { memoryStorage } from 'multer';
 
 @ApiTags('api/file-upload')
 @Controller('api/file-upload')
@@ -42,17 +42,9 @@ export class FileUploadController {
   })
   @UseInterceptors(
     FileInterceptor('file', {
-      storage: diskStorage({
-        destination: './uploads', // Optional: temporary local storage
-        filename: (req, file, callback) => {
-          const fileExt = file.mimetype.split('/')[1];
-          const fileName = `${Date.now()}.${fileExt}`;
-          callback(null, fileName);
-        },
-      }),
+      storage: memoryStorage(),
       fileFilter: (req, file, callback) => {
         if (!file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
-          console.log(file.mimetype);
           callback(
             new BadRequestException('Only image files are allowed!'),
             false,
