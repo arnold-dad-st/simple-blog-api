@@ -17,10 +17,13 @@ export class AuthGuard implements CanActivate {
 
     if (!token) throw new UnauthorizedException('Missing access token');
 
-    const user = await this.supabaseService.supabase.auth.getUser(token);
-    if (!user) throw new UnauthorizedException('Invalid access token');
+    const response = await this.supabaseService.supabase.auth.getUser(token);
 
-    request.user = user; // Attach user to request
-    return true;
+    if (response.error) {
+      throw new UnauthorizedException('Invalid access token');
+    }
+
+    request.user = response.data; // Attach user to request
+    return !!response.data.user;
   }
 }
