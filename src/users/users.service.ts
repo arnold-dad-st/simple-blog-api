@@ -10,7 +10,7 @@ export class UsersService {
     // Query profiles table for user information
     const { data, error } = await this.supabaseService.supabase
       .from('profiles')
-      .select('id, created_at, firstName, lastName, username, email');
+      .select('id, created_at, firstName, lastName, username, email, avatar');
 
     if (error) {
       throw new Error(`Failed to fetch users: ${error.message}`);

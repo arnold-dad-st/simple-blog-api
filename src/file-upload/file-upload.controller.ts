@@ -20,14 +20,12 @@ import { memoryStorage } from 'multer';
 
 @ApiTags('api/file-upload')
 @Controller('api/file-upload')
-@ApiBearerAuth('access-token')
 export class FileUploadController {
   constructor(private readonly fileUploadService: FileUploadService) {}
 
   @Post('upload')
   @ApiOperation({ summary: 'Upload an image file' })
   @ApiConsumes('multipart/form-data')
-  @UseGuards(AuthGuard)
   @ApiBody({
     description: 'Upload an image file',
     schema: {
