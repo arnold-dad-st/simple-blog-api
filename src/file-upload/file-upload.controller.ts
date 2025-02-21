@@ -4,18 +4,11 @@ import {
   UseInterceptors,
   UploadedFile,
   BadRequestException,
-  UseGuards,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileUploadService } from './file-upload.service';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiConsumes,
-  ApiBody,
-  ApiBearerAuth,
-} from '@nestjs/swagger';
-import { AuthGuard } from '../middleware/guard/auth.guard';
+import { ApiTags, ApiOperation, ApiConsumes, ApiBody } from '@nestjs/swagger';
+
 import { memoryStorage } from 'multer';
 
 @ApiTags('api/file-upload')
@@ -52,7 +45,7 @@ export class FileUploadController {
       },
     }),
   )
-  async uploadFile(@UploadedFile() file: Express.Multer.File) {
+  async uploadFile(@UploadedFile() file: any) {
     if (!file) {
       console.error('File is not uploaded');
       throw new BadRequestException('File is not uploaded');

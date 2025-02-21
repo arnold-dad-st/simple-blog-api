@@ -9,7 +9,7 @@ export class FileUploadService {
     private readonly configService: ConfigService,
   ) {}
 
-  async uploadToSupabase(file: Express.Multer.File): Promise<any> {
+  async uploadToSupabase(file: any): Promise<any> {
     try {
       const bucketName = 'images';
       const filePath = `${Date.now()}-${file.originalname}`;
